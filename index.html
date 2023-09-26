@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="card.css">
+
+</head>
+
+<body>
+    <header>
+        <nav>
+            <h1>Find movies</h1>
+            <input type="text" id="search_input" class="searchbox" value="" placeholder="E.g. Harry Potter">
+
+
+        </nav>
+    </header>
+    <main>
+
+        <!-- loader -->
+        <div class="loader"></div>
+        <!-- search result  -->
+        <section id="searchResults" class="searchResultss">
+            <!-- <h2>SEARCH RESULTS </h2> -->
+            <div id="searchResultsContent"></div>
+        </section>
+
+
+        <!-- lazy loading-->
+        <div class="lazy-load"></div>
+
+        <!-- selected movies  -->
+        <section id="movie-selected-card" class="movie-selected-card-class" style=" display: none;">
+            <div id="selected-movie-card" class="movie-card"> </div>
+
+        </section>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js"></script>
+
+
+    <!-- Handlebars.js template  -->
+    <script id="movie-card" type="text/x-handlebars-template">
+        {{#each movies}}
+        <div class="card">
+        <div class="movie movie-poster" data-imdbID="{{imdbID}}">
+            <img src="{{Poster}}" alt="{{Title}} Poster">
+        </div>
+         <div class="title-year">
+                <p class="movie-title">{{Title}}</p>
+                <p class="movie-year">({{Year}})</p>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>
