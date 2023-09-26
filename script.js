@@ -123,7 +123,7 @@ function closeMovieCard() {
 
 async function showcard(imdbID) {
   showLoader();
-  const apiUrl = `http://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`;
+  const apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}`;
   try {
     const response = await fetch(apiUrl);
     const data = await response.json();
@@ -169,11 +169,9 @@ window.addEventListener("scroll", function () {
   const scrollTop = window.scrollY;
   const windowHeight = window.innerHeight;
 
-
   const lazyLoadThreshold = 100;
 
   if (scrollHeight - scrollTop - windowHeight < lazyLoadThreshold) {
-
     lazyLoad();
   }
 });
