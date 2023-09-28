@@ -8,6 +8,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="card.css">
+    <link rel="stylesheet" href="selectedcard.css">
 
 </head>
 
@@ -48,7 +49,7 @@
         {{#each movies}}
         <div class="card">
         <div class="movie movie-poster" data-imdbID="{{imdbID}}">
-            <img src="{{Poster}}" alt="{{Title}} Poster">
+            <img src="{{Poster}}" alt="{{Title}} Poster" data-poster = "{{Poster}}">
         </div>
          <div class="title-year">
                 <p class="movie-title">{{Title}}</p>

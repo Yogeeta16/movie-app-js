@@ -1,7 +1,7 @@
-
 .card {
   width: 276px;
   height: 358px;
+  /* grid-template-columns: repeat(4, 1fr); */
   background-color: #fff;
   border: 1px solid #ddd;
   padding: 20px;
@@ -70,3 +70,4 @@
     font-weight: bold;
   }
 }
+

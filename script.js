@@ -17,7 +17,6 @@ const apiKey = "7b6214f5";
 let inputfield = document.getElementById("search_input");
 let searchkey = "";
 
-// Add the new input event listener
 inputfield.addEventListener(
   "input",
   debounce(function (e) {
@@ -32,15 +31,13 @@ inputfield.addEventListener(
 );
 
 function showLoader() {
-  if (loader.style.visibility !== "visible") {
-    loader.classList.add("loader--hidden");
-    loader.style.visibility = "visible";
-  }
+  loader.classList.add("loader--hidden");
+  loader.style.display = "flex";
 }
 
 function hideLoader() {
   loader.classList.remove("loader--hidden");
-  loader.style.visibility = "hidden";
+  loader.style.display = "none";
 }
 
 async function fetchAndRenderData(searchkey = "harry") {
@@ -53,6 +50,8 @@ async function fetchAndRenderData(searchkey = "harry") {
     const response = await fetch(apiUrl);
     const data = await response.json();
     console.log(data);
+
+    hideLoader();
     if (data.Response == "True") {
       const source = document.getElementById("movie-card").innerHTML;
       const template = Handlebars.compile(source);
@@ -63,17 +62,14 @@ async function fetchAndRenderData(searchkey = "harry") {
       resultwindow.style.display = "block";
       resultwindow.innerHTML = `
       <div class="notfound-container">
-      <div class="img">&#11088; </div>
+      <img src="./svgs/magnifying-glass.svg" alt="" />
       <h1>Oops…</h1>
       <p>Something went wrong on our end. </p>
       <p>Search data not found.</p>
     </div>
       `;
-
       return;
     }
-
-    hideLoader();
   } catch (error) {
     console.log("not found");
     var resultwindow = document.getElementById("searchResults");
@@ -97,7 +93,6 @@ window.onload = function () {
 };
 
 var movieContainer = document.getElementById("searchResults");
-
 movieContainer.addEventListener("click", function (event) {
   var movieElement = event.target.closest(".movie");
   if (movieElement) {
@@ -128,25 +123,49 @@ async function showcard(imdbID) {
     const response = await fetch(apiUrl);
     const data = await response.json();
     const selectedMovieCard = document.getElementById("selected-movie-card");
-
+    console.log(data);
     if (data) {
       hideLoader();
+
+      // <button class="close_movie"> X</button>
       selectedMovieCard.innerHTML = `
-        
-            <div class="image_p">
-              <img src="${data.Poster}" alt="${data.Title}">
-            </div> 
-            <div>
+     
+      
+      <div class="s-card">
+
+      <div class="image-container" style="background-image: url(${
+        data.Poster
+      });">
+       
+          <p>${data.Title}</p>
+          <div class="sub-content">
+          <p>${data.Released}</p>
+          <p><span class="img">&#11088; </span>${data.imdbRating} / 10</p>
+          </div>
+      </div>
+      <div class="content">
+          <div class="desktop-view">
+              <p>
               <h1>${data.Title}</h1>
-              <div class="ratings">
-                <p><img src="./svgs/1289679474.svg">${data.imdbRating} / 10</p>
+              </p>
+              <div class="sub-content">
+                  <p>${data.Released}</p>
+                  <p><span class="img">&#11088; </span>${
+                    data.imdbRating
+                  } / 10</p>
               </div>
-              <p>Released: ${data.Released}</p>
-              <p>${data.Plot}</p>
-            </div>
-            <button id="close_movie" > x </button>
-        
-        `;
+          </div>
+  
+          <ul>
+            ${data.Genre.split(", ")
+              .map((genre) => `<li>${genre}</li>`)
+              .join("")}
+          </ul>
+          <p>${data.Plot}</p>
+      </div>
+      <button id="close_movie" class="close-btn"> X</button>
+  </div>`;
+
       var closeButton = document.getElementById("close_movie");
       closeButton.addEventListener("click", function () {
         console.log("close");
@@ -162,6 +181,8 @@ async function showcard(imdbID) {
   }
 }
 
+// ----------------------------------------------------------------------------------------------
+
 const lazyLoadElement = document.querySelector(".lazy-load");
 
 window.addEventListener("scroll", function () {
@@ -169,19 +190,19 @@ window.addEventListener("scroll", function () {
   const scrollTop = window.scrollY;
   const windowHeight = window.innerHeight;
 
-  const lazyLoadThreshold = 100;
+  const lazyLoadThreshold = 10;
 
   if (scrollHeight - scrollTop - windowHeight < lazyLoadThreshold) {
     lazyLoad();
   }
 });
-let currentPage = 1; // Track the current page
 
-let resultwindow = document.getElementById("searchResults"); // Define resultwindow
+let currentPage = 1;
 
+let resultwindow = document.getElementById("searchResults");
 async function lazyLoad() {
   showLoader();
-  currentPage++; // Increment the page number for pagination
+  currentPage++;
 
   try {
     const response = await fetch(apiUrl + `&page=${currentPage}`);
@@ -191,9 +212,9 @@ async function lazyLoad() {
       const source = document.getElementById("movie-card").innerHTML;
       const template = Handlebars.compile(source);
       const html = template({ movies: data.Search });
-      resultwindow.innerHTML += html; // Append new content to the existing content
+      resultwindow.innerHTML += html;
     } else {
-      // Handle errors or end of results
+      console.log("end of all pages");
     }
 
     hideLoader();

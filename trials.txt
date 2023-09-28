@@ -1,0 +1,228 @@
+// ----------------------------------5----------------------------------------
+// async function fetchAndRenderData(searchkey = "harry") {
+//   apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchkey}`;
+//   try {
+//     var resultwindow = document.getElementById("searchResults");
+//     document.getElementById("movie-selected-card").style.display = "none";
+//     resultwindow.style.display = "flex";
+
+//     const response = await fetch(apiUrl);
+//     const data = await response.json();
+//     console.log(data);
+
+//     hideLoader();
+//     if (data.Response == "True") {
+//       // Filter out movies with "Poster" value as "N/A"
+//       const filteredMovies = data.Search.filter(
+//         (movie) => movie.Poster !== "N/A"
+//       );
+
+//       if (filteredMovies.length === 0) {
+//         resultwindow.innerHTML = "No movies found with posters.";
+//       } else {
+//         const source = document.getElementById("movie-card").innerHTML;
+//         const template = Handlebars.compile(source);
+//         const html = template({ movies: filteredMovies });
+//         resultwindow.innerHTML = html;
+//       }
+//     } else {
+//       var resultwindow = document.getElementById("searchResults");
+//       resultwindow.style.display = "block";
+//       resultwindow.innerHTML = `
+//         <div class="notfound-container">
+//           <img src="./svgs/magnifying-glass.svg" alt="" />
+//           <h1>Oops…</h1>
+//           <p>Something went wrong on our end. </p>
+//           <p>Search data not found.</p>
+//         </div>
+//       `;
+//     }
+//   } catch (error) {
+//     console.log("not found");
+//     var resultwindow = document.getElementById("searchResults");
+//     resultwindow.style.display = "block";
+//     resultwindow.innerHTML = `
+//       <div className="notfound-container">
+//         <img src="./svgs/surprised.svg" alt="" />
+//         <h1>Oops…</h1>
+//         <p>Something went wrong on our end. </p>
+//         <p>Try to refresh the page.</p>
+//       </div>
+//     `;
+//   }
+// }
+
+// ---------------------------------4-------------------------------------------------
+
+// async function fetchAndRenderData(searchkey = "harry") {
+//   apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchkey}`;
+//   try {
+//     var resultwindow = document.getElementById("searchResults");
+//     document.getElementById("movie-selected-card").style.display = "none";
+//     resultwindow.style.display = "flex";
+
+//     const response = await fetch(apiUrl);
+//     const data = await response.json();
+//     console.log(data);
+
+//     hideLoader();
+//     if (data.Response == "True") {
+//       // Filter out movies with "Poster" value as "N/A" or empty
+//       const filteredMovies = data.Search.filter(
+//         (movie) => movie.Poster && movie.Poster !== "N/A"
+//       );
+
+//       if (filteredMovies.length === 0) {
+//         resultwindow.innerHTML = "No movies found with posters.";
+//       } else {
+//         const source = document.getElementById("movie-card").innerHTML;
+//         const template = Handlebars.compile(source);
+//         const html = template({ movies: filteredMovies });
+//         resultwindow.innerHTML = html;
+//       }
+//     } else {
+//       var resultwindow = document.getElementById("searchResults");
+//       resultwindow.style.display = "block";
+//       resultwindow.innerHTML = `
+//         <div class="notfound-container">
+//           <img src="./svgs/magnifying-glass.svg" alt="" />
+//           <h1>Oops…</h1>
+//           <p>Something went wrong on our end. </p>
+//           <p>Search data not found.</p>
+//         </div>
+//       `;
+//     }
+//   } catch (error) {
+//     console.log("not found");
+//     var resultwindow = document.getElementById("searchResults");
+//     resultwindow.style.display = "block";
+//     resultwindow.innerHTML = `
+//       <div className="notfound-container">
+//         <img src="./svgs/surprised.svg" alt="" />
+//         <h1>Oops…</h1>
+//         <p>Something went wrong on our end. </p>
+//         <p>Try to refresh the page.</p>
+//       </div>
+//     `;
+//   }
+// }
+
+// -----------------------------------3----------------------------------------------------------
+
+// async function fetchAndRenderData(searchkey = "harry") {
+//   apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchkey}`;
+//   try {
+//     var resultwindow = document.getElementById("searchResults");
+//     document.getElementById("movie-selected-card").style.display = "none";
+//     resultwindow.style.display = "flex";
+
+//     const response = await fetch(apiUrl);
+//     const data = await response.json();
+//     console.log(data);
+
+//     hideLoader();
+//     if (data.Response == "True") {
+//       const source = document.getElementById("movie-card").innerHTML;
+//       const template = Handlebars.compile(source);
+
+//       // Filter out movies with "N/A" posters
+//       const filteredMovies = data.Search.filter(
+//         (movie) => movie.Poster !== "N/A"
+//       );
+
+//       if (filteredMovies.length > 0) {
+//         const html = template({ movies: filteredMovies });
+//         resultwindow.innerHTML = html;
+//       } else {
+//         resultwindow.innerHTML = `
+//           <div class="notfound-container">
+//             <img src="./svgs/magnifying-glass.svg" alt="" />
+//             <h1>No Movies Found</h1>
+//             <p>Sorry, no movies with posters were found for your search.</p>
+//           </div>
+//         `;
+//       }
+//     } else {
+//       var resultwindow = document.getElementById("searchResults");
+//       resultwindow.style.display = "block";
+//       resultwindow.innerHTML = `
+//         <div class="notfound-container">
+//           <img src="./svgs/magnifying-glass.svg" alt="" />
+//           <h1>Oops…</h1>
+//           <p>Something went wrong on our end. </p>
+//           <p>Search data not found.</p>
+//         </div>
+//       `;
+//       return;
+//     }
+//   } catch (error) {
+//     console.log("not found");
+//     var resultwindow = document.getElementById("searchResults");
+//     resultwindow.style.display = "block";
+//     resultwindow.innerHTML = `
+//       <div className="notfound-container">
+//         <img src="./svgs/surprised.svg" alt="" />
+//         <h1>Oops…</h1>
+//         <p>Something went wrong on our end. </p>
+//         <p>Try to refresh the page.</p>
+//       </div>
+//     `;
+//     return;
+//   }
+// }
+// -----------------------2-------------------------------------------------------------------------
+
+// async function fetchAndRenderData(searchkey = "harry") {
+//   apiUrl = `https://www.omdbapi.com/?apikey=${apiKey}&s=${searchkey}`;
+//   try {
+//     var resultwindow = document.getElementById("searchResults");
+//     document.getElementById("movie-selected-card").style.display = "none";
+//     resultwindow.style.display = "flex";
+
+//     const response = await fetch(apiUrl);
+//     const data = await response.json();
+//     console.log(data);
+
+//     hideLoader();
+//     if (data.Response == "True") {
+//       // Filter out movies with "Poster" value as "NA"
+//       const filteredMovies = data.Search.filter(
+//         (movie) => movie.Poster !== "NA"
+//       );
+
+//       if (filteredMovies.length === 0) {
+//         resultwindow.innerHTML = "No movies found with posters.";
+//       } else {
+//         const source = document.getElementById("movie-card").innerHTML;
+//         const template = Handlebars.compile(source);
+//         const html = template({ movies: filteredMovies });
+//         resultwindow.innerHTML = html;
+//       }
+//     } else {
+//       var resultwindow = document.getElementById("searchResults");
+//       resultwindow.style.display = "block";
+//       resultwindow.innerHTML = `
+//         <div class="notfound-container">
+//           <img src="./svgs/magnifying-glass.svg" alt="" />
+//           <h1>Oops…</h1>
+//           <p>Something went wrong on our end. </p>
+//           <p>Search data not found.</p>
+//         </div>
+//       `;
+//     }
+//   } catch (error) {
+//     console.log("not found");
+//     var resultwindow = document.getElementById("searchResults");
+//     resultwindow.style.display = "block";
+//     resultwindow.innerHTML = `
+//       <div className="notfound-container">
+//         <img src="./svgs/surprised.svg" alt="" />
+//         <h1>Oops…</h1>
+//         <p>Something went wrong on our end. </p>
+//         <p>Try to refresh the page.</p>
+//       </div>
+//     `;
+//   }
+// }
+
+// ------------------------------------------1------------------------------------------------------
