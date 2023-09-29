@@ -2,13 +2,20 @@ p {
   margin-top: 0px;
   margin-bottom: 0px;
 }
-.close-btn {
+
+/* .close-btn {
+  height: 2rem;
+  width: 2rem;
+  background: transparent;
+  border: none;
+} */
+
+.desktop-close-btn {
   height: 2rem;
   width: 2rem;
   background: transparent;
   border: none;
 }
-
 
 .image-container {
   background-repeat: no-repeat;
@@ -22,16 +29,25 @@ p {
   background-position: center;
   background-size: cover;
 }
+.mobile-close-btn {
+  display: none;
+}
 
 @media screen and (max-width: 774px) {
   .image-container {
     background-size: 100% 100%;
   }
-  .close-btn {
+  .mobile-close-btn {
+    display: flex;
     height: 2rem;
-    width: 2rem;
+    width: 100%;
     background: transparent;
     border: none;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .desktop-close-btn {
+    display: none;
   }
 }
 

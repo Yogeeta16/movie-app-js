@@ -110,6 +110,7 @@ function showcardonclick(imdbID) {
 }
 
 function closeMovieCard() {
+  console.log("close");
   var movie_selected_card = document.getElementById("movie-selected-card");
   movie_selected_card.style.display = "none";
   var resultWindow = document.getElementById("searchResults");
@@ -132,7 +133,7 @@ async function showcard(imdbID) {
      
       
       <div class="s-card">
-
+      <button class="mobile-close-btn " onclick=" closeMovieCard();"> X</button>
       <div class="image-container" style="background-image: url(${
         data.Poster
       });">
@@ -163,14 +164,16 @@ async function showcard(imdbID) {
           </ul>
           <p>${data.Plot}</p>
       </div>
-      <button id="close_movie" class="close-btn"> X</button>
+      <button  class="desktop-close-btn" onclick=" closeMovieCard();"> X</button>
   </div>`;
 
-      var closeButton = document.getElementById("close_movie");
-      closeButton.addEventListener("click", function () {
-        console.log("close");
-        closeMovieCard();
-      });
+      // var closeButton = document.getElementsByClassName("close-btn");
+      // if (closeButton) {
+      //   closeButton.addEventListener("click", function () {
+      //     console.log("close");
+      //     closeMovieCard();
+      //   });
+      // }
     } else {
       console.error(
         "Element with ID 'selected-movie-card' not found in the HTML."
